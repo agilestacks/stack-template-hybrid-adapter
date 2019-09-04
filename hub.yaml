@@ -1,0 +1,61 @@
+---
+version: 1
+kind: stack
+meta:
+  name: k8s-hybrid-adapter:1
+  brief: Bare-metal hybrid Kubernetes import adapter stack
+
+components:
+- name: k8s-hybrid
+  source:
+    dir: components/k8s-hybrid
+- name: tiller
+  source:
+    dir: components/tiller
+- name: cert-manager
+  source:
+    dir: components/cert-manager
+- name: traefik
+  source:
+    dir: components/traefik
+- name: dex
+  source:
+    dir: components/dex
+- name: kube-dashboard
+  source:
+    dir: components/kube-dashboard
+- name: automation-tasks-namespace
+  source:
+    dir: components/namespace
+
+requires:
+- aws
+
+lifecycle:
+  verbs: [deploy, undeploy]
+  order:
+  - k8s-hybrid
+  - tiller
+  - cert-manager
+  - traefik
+  - dex
+  - kube-dashboard
+  - automation-tasks-namespace
+  requires:
+    optional:
+    - component.cert-manager.enabled:cert-manager
+    - component.kubernetes-dashboard.enabled:kube-dashboard
+
+outputs:
+- name: k8s-hybrid:dns.domain
+- name: k8s-hybrid:kubernetes.flavor
+- name: k8s-hybrid:kubernetes.api.endpoint
+- name: k8s-hybrid:cloud.kind
+- name: k8s-hybrid:cloud.region
+- name: traefik:component.ingress.protocol
+- name: traefik:component.ingress.fqdn
+- name: traefik:component.ingress.ssoFqdn
+- name: traefik:component.ingress.urlPrefix
+- name: traefik:component.ingress.ssoUrlPrefix
+- name: dex:component.dex.issuer
+- name: kube-dashboard:component.kubernetes-dashboard.url
