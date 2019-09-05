@@ -1,18 +1,14 @@
 .DEFAULT_GOAL := deploy
 
-# TODO should use DOMAIN_NAME instead?
-export NAME          ?= metal-adapter
-export BASE_DOMAIN   ?= kubernetes.delivery
-
-ADAPTER_DOMAIN_NAME := $(NAME).$(BASE_DOMAIN)
+export DOMAIN_NAME ?= eks-1.cloud-account-name.superhub.io
 
 STATE_BUCKET ?= agilestacks.cloud-account-name.superhub.io
 STATE_REGION ?= us-east-2
 
-ELABORATE_FILE_FS := .hub/$(ADAPTER_DOMAIN_NAME).elaborate
-ELABORATE_FILE_S3 := s3://$(STATE_BUCKET)/$(ADAPTER_DOMAIN_NAME)/hub/metal-adapter/hub.elaborate
+ELABORATE_FILE_FS := .hub/$(DOMAIN_NAME).elaborate
+ELABORATE_FILE_S3 := s3://$(STATE_BUCKET)/$(DOMAIN_NAME)/hub/metal-adapter/hub.elaborate
 ELABORATE_FILES   := $(ELABORATE_FILE_FS),$(ELABORATE_FILE_S3)
-STATE_FILES       := .hub/$(ADAPTER_DOMAIN_NAME).state,s3://$(STATE_BUCKET)/$(ADAPTER_DOMAIN_NAME)/hub/metal-adapter/hub.state
+STATE_FILES       := .hub/$(DOMAIN_NAME).state,s3://$(STATE_BUCKET)/$(DOMAIN_NAME)/hub/metal-adapter/hub.state
 
 TEMPLATE_PARAMS ?= params/template.yaml
 STACK_PARAMS    ?= params/$(NAME).$(BASE_DOMAIN).yaml
@@ -84,5 +80,9 @@ invoke: $(ELABORATE_FILE_FS)
 endif
 
 clean:
-	-rm -f .hub/$(ADAPTER_DOMAIN_NAME)*
+	-rm -f .hub/$(DOMAIN_NAME)*
 .PHONY: clean
+
+sync:
+	$(hub) api instance sync $(DOMAIN_NAME) -s $(STATE_FILES) $(HUB_OPTS)
+.PHONY: sync
