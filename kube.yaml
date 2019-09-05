@@ -1,7 +1,7 @@
 ---
 parameters:
 - name: kubernetes.flavor
-  value: metal
+  value: hybrid
 - name: kubernetes.api
   kind: user
   parameters:

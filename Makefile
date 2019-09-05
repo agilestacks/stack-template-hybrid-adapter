@@ -6,9 +6,9 @@ STATE_BUCKET ?= agilestacks.cloud-account-name.superhub.io
 STATE_REGION ?= us-east-2
 
 ELABORATE_FILE_FS := .hub/$(DOMAIN_NAME).elaborate
-ELABORATE_FILE_S3 := s3://$(STATE_BUCKET)/$(DOMAIN_NAME)/hub/metal-adapter/hub.elaborate
+ELABORATE_FILE_S3 := s3://$(STATE_BUCKET)/$(DOMAIN_NAME)/hub/hybrid-adapter/hub.elaborate
 ELABORATE_FILES   := $(ELABORATE_FILE_FS),$(ELABORATE_FILE_S3)
-STATE_FILES       := .hub/$(DOMAIN_NAME).state,s3://$(STATE_BUCKET)/$(DOMAIN_NAME)/hub/metal-adapter/hub.state
+STATE_FILES       := .hub/$(DOMAIN_NAME).state,s3://$(STATE_BUCKET)/$(DOMAIN_NAME)/hub/hybrid-adapter/hub.state
 
 TEMPLATE_PARAMS ?= params/template.yaml
 STACK_PARAMS    ?= params/$(NAME).$(BASE_DOMAIN).yaml
