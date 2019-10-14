@@ -30,6 +30,9 @@ components:
 - name: automation-tasks-namespace
   source:
     dir: components/namespace
+- name: ceph
+  source:
+    dir: components/ceph
 
 requires:
 - aws
@@ -45,6 +48,7 @@ lifecycle:
   - dex
   - kube-dashboard
   - automation-tasks-namespace
+  - ceph
   requires:
     optional:
     - component.cert-manager.enabled:cert-manager
@@ -63,3 +67,4 @@ outputs:
 - name: traefik:component.ingress.ssoUrlPrefix
 - name: dex:component.dex.issuer
 - name: kube-dashboard:component.kubernetes-dashboard.url
+- name: ceph:component.ceph.dashboard.url
