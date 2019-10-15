@@ -60,6 +60,7 @@ outputs:
 - name: k8s-hybrid:kubernetes.api.endpoint
 - name: k8s-hybrid:cloud.kind
 - name: k8s-hybrid:cloud.region
+- name: 'cert-manager:component.tls.kind'
 - name: traefik:component.ingress.protocol
 - name: traefik:component.ingress.fqdn
 - name: traefik:component.ingress.ssoFqdn
