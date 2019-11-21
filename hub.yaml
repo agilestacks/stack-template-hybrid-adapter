@@ -52,6 +52,7 @@ lifecycle:
   requires:
     optional:
     - component.cert-manager.enabled:cert-manager
+    - component.ceph.enabled:ceph
     - component.kubernetes-dashboard.enabled:kube-dashboard
 
 outputs:
