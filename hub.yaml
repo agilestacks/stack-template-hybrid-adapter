@@ -33,6 +33,12 @@ components:
 - name: ceph
   source:
     dir: components/ceph
+- name: deephorizon
+  source:
+    dir: components/deephorizon
+- name: external-dns
+  source:
+    dir: components/external-dns
 
 requires:
 - aws
@@ -42,6 +48,8 @@ lifecycle:
   order:
   - k8s-hybrid
   - tiller
+  - deephorizon
+  - external-dns
   - cert-manager
   - tls-host-controller
   - traefik
@@ -53,7 +61,10 @@ lifecycle:
     optional:
     - component.cert-manager.enabled:cert-manager
     - component.ceph.enabled:ceph
+    - component.deephorizon.enabled:deephorizon
+    - component.external-dns.enabled:external-dns
     - component.kubernetes-dashboard.enabled:kube-dashboard
+
 
 outputs:
 - name: k8s-hybrid:dns.domain
