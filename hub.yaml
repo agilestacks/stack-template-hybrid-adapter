@@ -33,6 +33,9 @@ components:
 - name: ceph
   source:
     dir: components/ceph
+- name: nfs-client-provisioner
+  source:
+    dir: components/nfs-client-provisioner
 - name: deephorizon
   source:
     dir: components/deephorizon
@@ -57,10 +60,12 @@ lifecycle:
   - kube-dashboard
   - automation-tasks-namespace
   - ceph
+  - nfs-client-provisioner
   requires:
     optional:
     - component.cert-manager.enabled:cert-manager
     - component.ceph.enabled:ceph
+    - component.nfs-client-provisioner.enabled:nfs-client-provisioner
     - component.deephorizon.enabled:deephorizon
     - component.external-dns.enabled:external-dns
     - component.kubernetes-dashboard.enabled:kube-dashboard
