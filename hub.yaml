@@ -54,8 +54,8 @@ lifecycle:
   - deephorizon
   - external-dns
   - cert-manager
-  - tls-host-controller
   - traefik
+  - tls-host-controller
   - dex
   - kube-dashboard
   - automation-tasks-namespace
