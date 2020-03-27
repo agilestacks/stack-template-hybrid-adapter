@@ -61,15 +61,6 @@ lifecycle:
   - automation-tasks-namespace
   - ceph
   - nfs-client-provisioner
-  requires:
-    optional:
-    - component.cert-manager.enabled:cert-manager
-    - component.ceph.enabled:ceph
-    - component.nfs-client-provisioner.enabled:nfs-client-provisioner
-    - component.deephorizon.enabled:deephorizon
-    - component.external-dns.enabled:external-dns
-    - component.kubernetes-dashboard.enabled:kube-dashboard
-
 
 outputs:
 - name: k8s-hybrid:dns.domain
